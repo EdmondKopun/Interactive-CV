@@ -1,1 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Interactive CV</title>
+  <meta name="description" content="Interactive CV / resume" />
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0f1724; /* dark bg for dark mode */
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #06b6d4;
+      --glass: rgba(255,255,255,0.03);
+      --text: #e6eef6;
+      --max-w: 920px;
+      --radius: 12px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,#071021 0%, #071722 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px 16px;
+      display:flex;justify-content:center;align-items:flex-start;
+      gap:20px;
+    }
+
+    .container{width:100%;max-width:var(--max-w)}
+    .cv-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    /* Sidebar */
+    .sidebar{background:var(--glass);padding:18px;border-radius:10px}
+    .photo{
+      width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,var(--accent),#4f46e5);
+      display:flex;align-items:center;justify-content:center;color:#021226;font-weight:700;font-size:22px
+    }
+    .name{font-size:20px;font-weight:700;margin-top:14px}
+    .role{color:var(--muted);font-size:13px;margin-top:6px}
+    .contact{margin-top:14px;font-size:14px}
+    .contact a{color:var(--text);text-decoration:none}
+    .contact .muted{color:var(--muted);font-size:13px}
+    .skills,.tools{margin-top:18px}
+    .chip{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 8px;margin:6px 6px 0 0;border-radius:999px;font-size:13px}
+
+    /* Main */
+    .main{padding:6px 6px 6px 12px}
+    .headline{display:flex;justify-content:space-between;align-items:center}
+    .headline h1{margin:0;font-size:22px}
+    .controls{display:flex;gap:8px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--text);cursor:pointer;font-size:13px}
+    .summary{margin-top:12px;color:var(--muted);line-height:1.5}
+
+    section{margin-top:18px}
+    .section-title{display:flex;justify-content:space-between;align-items:center}
+    .section-title h3{margin:0;font-size:16px}
+    .item{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);margin-top:10px}
+    .item h4{margin:0;font-size:15px}
+    .meta{color:var(--muted);font-size:13px;margin-top:6px}
+    .desc{margin-top:8px;color:var(--muted);line-height:1.45}
+
+    /* responsive */
+    @media (max-width:880px){
+      .cv-card{grid-template-columns:1fr;}
+      .sidebar{order:2}
+    }
+
+    /* Print stylesheet */
+    @media print{
+      body{background:white;color:black;padding:0}
+      .cv-card{box-shadow:none;border-radius:0}
+      .btn,.controls{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="cv-card" role="main">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" aria-label="Personal information">
+        <div class="photo" id="photo">Y N</div>
+        <div class="name" id="fullname">Your Name</div>
+        <div class="role" id="role">Product Designer • Frontend Engineer</div>
+
+        <div class="contact" aria-label="Contact">
+          <div class="muted">Contact</div>
+          <div><a href="mailto:you@example.com" id="email">you@example.com</a></div>
+          <div><a href="#" id="phone">+421 900 000 000</a></div>
+          <div><a href="#" id="website">your-website.com</a></div>
+        </div>
+
+        <div class="skills">
+          <div class="muted">Skills</div>
+          <div id="skills-list">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">React</span>
+          </div>
+        </div>
+
+        <div class="tools">
+          <div class="muted">Tools</div>
+          <div id="tools-list">
+            <span class="chip">Figma</span>
+            <span class="chip">VSCode</span>
+            <span class="chip">Git</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <div class="headline">
+          <div>
+            <h1 id="title">Interactive CV</h1>
+            <div class="summary" id="summary">Short professional summary — replace this text with a 2–3 line summary of your expertise and career goals.</div>
+          </div>
+
+          <div class="controls" role="toolbar" aria-label="Document actions">
+            <button class="btn" id="toggle-theme" aria-pressed="false">Toggle Theme</button>
+            <button class="btn" id="print-btn">Print / Save PDF</button>
+            <button class="btn" id="download-json">Download JSON</button>
+          </div>
+        </div>
+
+        <section id="experience">
+          <div class="section-title"><h3>Experience</h3></div>
+
+          <article class="item" data-role="job">
+            <h4>Senior Frontend Engineer — Awesome Company</h4>
+            <div class="meta">Jan 2022 — Present • Bratislava, Slovakia</div>
+            <div class="desc">Lead frontend projects, mentor engineers, and ship performant user interfaces. Achievements: improved performance
